@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <title>Hello World!</title> -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+  </head>
+  <body style="user-select: none; -webkit-app-region: drag">
+    <h1>Hello World!</h1>
+    <p>
+      We are using Node.js <span id="node-version"></span>, Chromium
+      <span id="chrome-version"></span>, and Electron
+      <span id="electron-version"></span>.
+    </p>
+    <a href="./child.html" target="_blank">Go To Child Window</a>
+    <br />
+    <br /><br />
+    <br />
+    <input type="range" style="-webkit-app-region: no-drag" />
+    <br />
+    <img
+      src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+      alt=""
+      height="200px"
+      width="300px"
+    />
+    <br />
+    <a
+      href="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+      target="_blank"
+      >Open Image</a
+    >
+
+    <br /><br />
+    <button onclick="zoomOut()">Zoom Out</button>
+    <button onclick="zoomIn()">Zoom In</button>
+    <button onclick="shareData()">Get Data</button>
+
+    <script>
+      console.log("Renderer Process");
+      const { webFrame, ipcRenderer } = require("electron");
+
+      function shareData() {
+        console.log("Working renderer");
+        ipcRenderer.send("message", "Hello from the Renderer");
+        ipcRenderer.on("reply", (event, arg) => {
+          console.log(arg);
+        });
+      }
+
+      function zoomOut() {
+        webFrame.setZoomFactor(webFrame.getZoomFactor() - 1);
+      }
+      function zoomIn() {
+        webFrame.setZoomFactor(webFrame.getZoomFactor() + 1);
+      }
+    </script>
+  </body>
+</html>

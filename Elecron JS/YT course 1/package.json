@@ -1,0 +1,20 @@
+{
+  "name": "electron-js",
+  "version": "1.0.0",
+  "description": "Learning electron js",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "nodemon --exec electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dileep Kumar C B",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^24.3.0"
+  },
+  "dependencies": {
+    "electron-window-state": "^5.0.3",
+    "nodemon": "^2.0.22"
+  }
+}
